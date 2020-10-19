@@ -4,9 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repositories\CategoryRepository\CategoryRepositoryInterface;
 
 class CategoryController extends Controller
 {
+    protected $categoryRepository;
+
+    public function __construct(CategoryRepositoryInterface $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = $this->categoryRepository->getAll();
+        dd($categories);
     }
 
     /**
